@@ -76,7 +76,7 @@ body {
 }
 
 .container>* {
-    border: 4px dotted greenyellow;
+    /* border: 4px dotted greenyellow; */
     margin-bottom: 20px;
     color: whitesmoke;
 }
@@ -116,6 +116,20 @@ button#start {
     padding: 5px;
     font-size: 1.3rem;
     letter-spacing: 1.5px;
+}
+
+.item.name input,
+.item.icon input,
+button#start:hover {
+    cursor: pointer;
+}
+
+button#start:hover {
+    scale: 1.2;
+}
+
+button#start:active {
+    transform: translateY(3px);
 }
 
 /* user style ends here */
