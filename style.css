@@ -22,7 +22,16 @@ body {
 body {
     height: 100vh;
     width: 100vw;
+
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Open Sans', sans-serif;
     font-size: 16px;
+}
+
+/* override chrome default border style on elements */
+*,
+*:focus,
+*:hover {
+    outline: none;
 }
 
 /* UA reset ends  */
@@ -56,9 +65,57 @@ body {
     height: 300px;
     border: 3.2px solid red;
     border-radius: 10px;
+    padding: 20px;
 
     position: relative;
     top: -50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container>* {
+    border: 4px dotted greenyellow;
+    margin-bottom: 20px;
+    color: whitesmoke;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.item.name :first-child,
+.item.icon :first-child {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.item.name input[type='text'] {
+    height: 27px;
+    padding: 2px;
+    border-radius: 3px;
+
+    background-color: #DDD6D0;
+    font-weight: bold;
+    font-size: 1rem;
+    letter-spacing: 0.08rem;
+}
+
+.item.icon input[type='radio']:nth-child(3) {
+    margin-right: 10px;
+}
+
+button#start {
+    background-color: #413A3B;
+    font-family: 'LobsterRegular', system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Open Sans', sans-serif;
+
+    padding: 5px;
+    font-size: 1.3rem;
+    letter-spacing: 1.5px;
 }
 
 /* user style ends here */

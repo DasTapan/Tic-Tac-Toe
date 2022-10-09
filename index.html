@@ -14,9 +14,18 @@
 <body>
     <h1>Play a game of Tic-Tac-Toe</h1>
     <div class="container">
-        <div class="item name"></div>
-        <div class="item icon"></div>
-        <button id="start"></button>
+        <div class="item name">
+            <label for="player-name">Name:</label>
+            <input type="text" name="name" id="player-name">
+        </div>
+        <div class="item icon">
+            <span>Symbol:</span>
+            <label for="cross">Cross</label>
+            <input type="radio" name="symbol" id="cross" value="cross">
+            <label for="round">Round</label>
+            <input type="radio" name="symbol" id="round" value="round">
+        </div>
+        <button id="start">Start Game</button>
     </div>
 </body>
 
