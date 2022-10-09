@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'RacingSansOneRegular';
+    src: url('./Fonts/RacingSansOne-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'LobsterRegular';
+    src: url('./Fonts/Lobster.ttf');
+}
+
+/* soft UA reset */
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* UA reset ends  */
