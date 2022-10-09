@@ -19,4 +19,46 @@ body {
     box-sizing: border-box;
 }
 
+body {
+    height: 100vh;
+    width: 100vw;
+    font-size: 16px;
+}
+
 /* UA reset ends  */
+
+/* user style begins here */
+h1 {
+    margin: 0;
+    position: absolute;
+    top: 60px;
+
+    font-family: 'RacingSansOneRegular', system-ui, -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 3.5rem;
+
+    letter-spacing: 4px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    background-image: url('./Images/blue-brick.jpg');
+    background-size: 100% 100%;
+}
+
+.container {
+    width: 500px;
+    height: 300px;
+    border: 3.2px solid red;
+    border-radius: 10px;
+
+    position: relative;
+    top: -50px;
+}
+
+/* user style ends here */
