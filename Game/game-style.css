@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'LobsterRegular';
-    src: url('./Fonts/Lobster.ttf');
+    src: url('../Fonts/Lobster.ttf');
 }
 
 /* soft UA reset */
@@ -36,6 +36,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-image: url('../Images/white-brick.jpg');
+    background-size: 100% 100%;
 }
 
 .container {
@@ -43,7 +46,8 @@ body {
     height: 400px;
     padding: 10px;
 
-    border: 2px solid red;
+    border: 5px solid red;
+    border-radius: 15px;
 }
 
 .container {
@@ -56,9 +60,10 @@ body {
 .game-board {
     width: 280px;
     height: 280px;
-
-    /* border: 2px solid blue; */
     border-radius: 5px;
+
+    margin-bottom: 20px;
+
 }
 
 .game-board {
@@ -70,17 +75,14 @@ body {
 }
 
 .game-board>div {
-    border: 1px solid blue;
-    /* border-style: solid;
-    border-color: blue;
-    border-width: 1px; */
-    /* border-top-width: 0;
-    border-left-width: 0;
-    border-right-width: 1px;
-    border-bottom-width: 1px; */
+    border: 1.6px solid blue;
 
     height: var(--cell-height);
     width: var(--cell-width);
+}
+
+.game-board>div:hover {
+    cursor: pointer;
 }
 
 .cell.one,
@@ -108,10 +110,23 @@ body {
 }
 
 .container button {
-    height: 30px;
-    border-radius: 3px;
+    height: 50px;
+    width: 100px;
+    border-radius: 10px;
     border: 1px solid;
     padding: 5px;
+    color: #242D27;
+    background-color: #E8EEEC;
 }
 
+.container button {
+    font-family: 'LobsterRegular', system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Open Sans', sans-serif;
+    letter-spacing: 1.6px;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.container button:hover {
+    cursor: pointer;
+}
 /* user style ends here */
