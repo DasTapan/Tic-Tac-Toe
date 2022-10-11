@@ -1,18 +1,32 @@
-const gameBoardArray = ['X', 'X', 'O',
-    'O', 'X', 'O',
-    'X', 'O', 'X'];
+const divRef = document.querySelector('.container');
 
-const gameBoardObj = ((innerArray, doc) => {
-    const boardArray = innerArray.slice();
-    const gameBoardDiv = doc.querySelector('.game-board');
-    const allCells = gameBoardDiv.children;
+const game = (() => {
+    let validPlayer;
 
-    const printArray = () => console.table(boardArray);
-
-    const render = () => {
-        for (let i = 0; i < 9; i++) {
-            allCells[i].textContent = boardArray[i];
-        }
+    const validator = () => {
+        if (player1.valid == true) validPlayer = player1.name;
+        else validPlayer = player2.name;
+        console.log(`valid: ${validPlayer}`);
     }
-    return { printArray, render };
-})(gameBoardArray, document);
+
+    const findValidPlayer = () => {
+        validator();
+    };
+
+    return { findValidPlayer };
+})();
+
+const Player = (_name, _mark, _valid) => {
+
+    const name = _name;
+    const mark = _mark;
+    const valid = _valid;
+
+    return { name, mark, valid };
+}
+
+divRef.addEventListener('click', game.findValidPlayer);
+
+const player1 = Player('Player1', 'X', true);
+const player2 = Player('Player2', 'O', false);
+
