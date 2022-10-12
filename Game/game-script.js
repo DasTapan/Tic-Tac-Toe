@@ -34,7 +34,16 @@ const game = (() => {
         return _validator();
     }
 
-    return { getValidMark };
+    const _toggleValidity = () => {
+        player1.toggleValidity();
+        player2.toggleValidity();
+    };
+
+    const swapMark = () => {
+        _toggleValidity();
+    };
+
+    return { getValidMark, swapMark };
 })();
 
 const displayController = (() => {
@@ -42,20 +51,20 @@ const displayController = (() => {
         _cell.textContent = _mark;
     }
 
-    const displayInput = (cell,mark) => {
-        _render(cell,mark);
+    const displayInput = (cell, mark) => {
+        _render(cell, mark);
     }
 
     return { displayInput };
 })();
 
 const player1 = Player('player1', 'X', true);
-const player2 = Player('player2', 'X', false);
+const player2 = Player('player2', 'O', false);
 
 gameBoarDiv.addEventListener('click', (event) => {
     let targetedCell = event.target.closest('div');
     let targetedCellClass = targetedCell.classList[1];
-    console.log(targetedCellClass);
     let validMark = game.getValidMark();
     displayController.displayInput(targetedCell, validMark);
+    game.swapMark();
 })
