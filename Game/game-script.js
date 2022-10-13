@@ -1,5 +1,29 @@
 const gameBoarDiv = document.querySelector('.game-board');
 
+const gameBoarObj = (() => {
+    let _cellIndex;
+    const _boardArray = [null, null, null, null, null, null, null, null, null];
+
+    const _checkRepetition = (clickedCell) => {
+        _cellIndex = Array.from(gameBoarDiv.children).indexOf(clickedCell);
+        if (_boardArray[_cellIndex] === null) _insertMark(clickedCell)
+        else return
+    }
+
+    const _insertMark = (clickedCell) => {
+        let _validMark = game.getValidMark();
+        _boardArray[_cellIndex] = _validMark;
+        displayController.displayInput(clickedCell, _validMark);
+        game.swapMark();
+    }
+
+    const sanitizeValue = (targetedCell) => {
+        _checkRepetition(targetedCell);
+    }
+
+    return { sanitizeValue };
+})();
+
 const Player = (_name, _mark, _valid) => {
     const getMark = () => _mark;
     const getValidStatus = () => _valid;
@@ -43,7 +67,11 @@ const game = (() => {
         _toggleValidity();
     };
 
-    return { getValidMark, swapMark };
+    const disableClick = (clickedCell) => {
+        clickedCell.style.pointerEvents = 'none';
+    }
+
+    return { getValidMark, swapMark, disableClick };
 })();
 
 const displayController = (() => {
@@ -63,8 +91,6 @@ const player2 = Player('player2', 'O', false);
 
 gameBoarDiv.addEventListener('click', (event) => {
     let targetedCell = event.target.closest('div');
-    let targetedCellClass = targetedCell.classList[1];
-    let validMark = game.getValidMark();
-    displayController.displayInput(targetedCell, validMark);
-    game.swapMark();
+    gameBoarObj.sanitizeValue(targetedCell);
+    console.log(targetedCell);
 })
