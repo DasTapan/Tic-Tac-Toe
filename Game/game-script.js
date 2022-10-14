@@ -1,7 +1,9 @@
 const gameBoarDiv = document.querySelector('.game-board');
+const resultDiv = document.querySelector('.result-banner');
 
-const gameBoarObj = (() => {
+const gameBoardObj = (() => {
     let _cellIndex;
+    let _iterator = 0;
     const _boardArray = [null, null, null, null, null, null, null, null, null];
 
     const _checkRepetition = (clickedCell) => {
@@ -13,15 +15,19 @@ const gameBoarObj = (() => {
     const _insertMark = (clickedCell) => {
         let _validMark = game.getValidMark();
         _boardArray[_cellIndex] = _validMark;
+        _iterator++;
         displayController.displayInput(clickedCell, _validMark);
+        game.checkWinner(_cellIndex, _iterator);
         game.swapMark();
     }
+
+    const getArray = () => _boardArray;
 
     const sanitizeValue = (targetedCell) => {
         _checkRepetition(targetedCell);
     }
 
-    return { sanitizeValue };
+    return { sanitizeValue, getArray };
 })();
 
 const Player = (_name, _mark, _valid) => {
@@ -63,15 +69,89 @@ const game = (() => {
         player2.toggleValidity();
     };
 
+    const checkWinner = (cellIndex, count) => {
+        let array = gameBoardObj.getArray().slice();
+        let status;
+        switch (cellIndex) {
+            case 0:
+                if (array[0] === array[1] && array[0] === array[2]) displayController.displayResult('Victory');
+                else if (array[0] === array[3] && array[0] === array[6]) displayController.displayResult('Victory');
+                else if (array[0] === array[4] && array[0] === array[8]) displayController.displayResult('Victory');
+                else {
+                    if (count === 9) displayController.displayResult('Match Drawn');
+                }
+                break;
+            case 1:
+                if (array[0] === array[1] && array[0] === array[2]) displayController.displayResult('Victory');
+                else if (array[1] === array[4] && array[1] === array[7]) displayController.displayResult('Victory');
+                else {
+                    if (count === 9) displayController.displayResult('Match Drawn');
+                }
+                break;
+            case 2:
+                if (array[0] === array[1] && array[0] === array[2]) displayController.displayResult('Victory');
+                else if (array[2] === array[5] && array[2] === array[8]) displayController.displayResult('Victory');
+                else if (array[2] === array[4] && array[2] === array[6]) displayController.displayResult('Victory');
+                else {
+                    if (count === 9) displayController.displayResult('Match Drawn');
+                }
+                break;
+            case 3:
+                if (array[3] === array[4] && array[3] === array[5]) displayController.displayResult('Victory');
+                else if (array[0] === array[3] && array[0] === array[6]) displayController.displayResult('Victory');
+                else {
+                    if (count === 9) displayController.displayResult('Match Drawn');
+                }
+                break;
+            case 4:
+                if (array[1] === array[4] && array[1] === array[7]) displayController.displayResult('Victory');
+                else if (array[3] === array[4] && array[3] === array[5]) displayController.displayResult('Victory');
+                else if (array[0] === array[4] && array[0] === array[8]) displayController.displayResult('Victory');
+                else {
+                    if (count === 9) displayController.displayResult('Match Drawn');
+                }
+                break;
+            case 5:
+                if (array[2] === array[5] && array[2] === array[8]) displayController.displayResult('Victory');
+                else if (array[3] === array[4] && array[3] === array[5]) displayController.displayResult('Victory');
+                else {
+                    if (count === 9) displayController.displayResult('Match Drawn');
+                }
+                break;
+            case 6:
+                if (array[0] === array[3] && array[0] === array[6]) displayController.displayResult('Victory');
+                else if (array[6] === array[7] && array[6] === array[8]) displayController.displayResult('Victory');
+                else if (array[6] === array[4] && array[6] === array[2]) displayController.displayResult('Victory');
+                else {
+                    if (count === 9) displayController.displayResult('Match Drawn');
+                }
+                break;
+            case 7:
+                if (array[1] === array[4] && array[1] === array[7]) displayController.displayResult('Victory');
+                else if (array[6] === array[7] && array[6] === array[8]) displayController.displayResult('Victory');
+                else {
+                    if (count === 9) displayController.displayResult('Match Drawn');
+                }
+                break;
+            case 8:
+                if (array[2] === array[5] && array[2] === array[8]) displayController.displayResult('Victory');
+                else if (array[6] === array[7] && array[6] === array[8]) displayController.displayResult('Victory');
+                else if (array[0] === array[4] && array[0] === array[8]) displayController.displayResult('Victory');
+                else {
+                    if (count === 9) displayController.displayResult('Match Drawn');
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
     const swapMark = () => {
         _toggleValidity();
     };
 
-    const disableClick = (clickedCell) => {
-        clickedCell.style.pointerEvents = 'none';
-    }
-
-    return { getValidMark, swapMark, disableClick };
+    return { getValidMark, swapMark, checkWinner };
 })();
 
 const displayController = (() => {
@@ -83,7 +163,15 @@ const displayController = (() => {
         _render(cell, mark);
     }
 
-    return { displayInput };
+    const _display = (result) => {
+        resultDiv.textContent = result;
+    }
+
+    const displayResult = (message) => {
+        _display(message);
+    }
+
+    return { displayInput, displayResult };
 })();
 
 const player1 = Player('player1', 'X', true);
@@ -91,6 +179,6 @@ const player2 = Player('player2', 'O', false);
 
 gameBoarDiv.addEventListener('click', (event) => {
     let targetedCell = event.target.closest('div');
-    gameBoarObj.sanitizeValue(targetedCell);
+    gameBoardObj.sanitizeValue(targetedCell);
     console.log(targetedCell);
 })
