@@ -4,11 +4,14 @@ const resultDiv = document.querySelector('.result-banner');
 const gameBoardObj = (() => {
     let _cellIndex;
     let _iterator = 0;
+    let _gameEnded = false;
     const _boardArray = [null, null, null, null, null, null, null, null, null];
 
     const _checkRepetition = (clickedCell) => {
         _cellIndex = Array.from(gameBoarDiv.children).indexOf(clickedCell);
-        if (_boardArray[_cellIndex] === null) _insertMark(clickedCell)
+        if (_boardArray[_cellIndex] === null) {
+            if (_gameEnded === false) _insertMark(clickedCell);
+        }
         else return
     }
 
@@ -17,8 +20,12 @@ const gameBoardObj = (() => {
         _boardArray[_cellIndex] = _validMark;
         _iterator++;
         displayController.displayInput(clickedCell, _validMark);
-        game.checkWinner(_cellIndex, _iterator);
+        game.getWinner(_cellIndex, _iterator);
         game.swapMark();
+    }
+
+    const setGameEnded = () => {
+        _gameEnded = true;
     }
 
     const getArray = () => _boardArray;
@@ -27,7 +34,7 @@ const gameBoardObj = (() => {
         _checkRepetition(targetedCell);
     }
 
-    return { sanitizeValue, getArray };
+    return { sanitizeValue, getArray, setGameEnded };
 })();
 
 const Player = (_name, _mark, _valid) => {
@@ -71,74 +78,74 @@ const game = (() => {
         player2.toggleValidity();
     };
 
-    const checkWinner = (cellIndex, count) => {
+    const _checkWinner = (cellIndex, count) => {
         let array = gameBoardObj.getArray().slice();
         let status;
         switch (cellIndex) {
             case 0:
-                if (array[0] === array[1] && array[0] === array[2]) decideWinner(array[0]);
-                else if (array[0] === array[3] && array[0] === array[6]) decideWinner(array[0]);
-                else if (array[0] === array[4] && array[0] === array[8]) decideWinner(array[0]);
+                if (array[0] === array[1] && array[0] === array[2]) _decideWinner(array[0]);
+                else if (array[0] === array[3] && array[0] === array[6]) _decideWinner(array[0]);
+                else if (array[0] === array[4] && array[0] === array[8]) _decideWinner(array[0]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 1:
-                if (array[0] === array[1] && array[0] === array[2]) decideWinner(array[0]);
-                else if (array[1] === array[4] && array[1] === array[7]) decideWinner(array[1]);
+                if (array[0] === array[1] && array[0] === array[2]) _decideWinner(array[0]);
+                else if (array[1] === array[4] && array[1] === array[7]) _decideWinner(array[1]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 2:
-                if (array[0] === array[1] && array[0] === array[2]) decideWinner(array[0]);
-                else if (array[2] === array[5] && array[2] === array[8]) decideWinner(array[2]);
-                else if (array[2] === array[4] && array[2] === array[6]) decideWinner(array[2]);
+                if (array[0] === array[1] && array[0] === array[2]) _decideWinner(array[0]);
+                else if (array[2] === array[5] && array[2] === array[8]) _decideWinner(array[2]);
+                else if (array[2] === array[4] && array[2] === array[6]) _decideWinner(array[2]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 3:
-                if (array[3] === array[4] && array[3] === array[5]) decideWinner(array[3]);
-                else if (array[0] === array[3] && array[0] === array[6]) decideWinner(array[0]);
+                if (array[3] === array[4] && array[3] === array[5]) _decideWinner(array[3]);
+                else if (array[0] === array[3] && array[0] === array[6]) _decideWinner(array[0]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 4:
-                if (array[1] === array[4] && array[1] === array[7]) decideWinner(array[1]);
-                else if (array[3] === array[4] && array[3] === array[5]) decideWinner(array[3]);
-                else if (array[0] === array[4] && array[0] === array[8]) decideWinner(array[0]);
+                if (array[1] === array[4] && array[1] === array[7]) _decideWinner(array[1]);
+                else if (array[3] === array[4] && array[3] === array[5]) _decideWinner(array[3]);
+                else if (array[0] === array[4] && array[0] === array[8]) _decideWinner(array[0]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 5:
-                if (array[2] === array[5] && array[2] === array[8]) decideWinner(array[2]);
-                else if (array[3] === array[4] && array[3] === array[5]) decideWinner(array[3]);
+                if (array[2] === array[5] && array[2] === array[8]) _decideWinner(array[2]);
+                else if (array[3] === array[4] && array[3] === array[5]) _decideWinner(array[3]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 6:
-                if (array[0] === array[3] && array[0] === array[6]) decideWinner(array[0]);
-                else if (array[6] === array[7] && array[6] === array[8]) decideWinner(array[6]);
-                else if (array[6] === array[4] && array[6] === array[2]) decideWinner(array[6]);
+                if (array[0] === array[3] && array[0] === array[6]) _decideWinner(array[0]);
+                else if (array[6] === array[7] && array[6] === array[8]) _decideWinner(array[6]);
+                else if (array[6] === array[4] && array[6] === array[2]) _decideWinner(array[6]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 7:
-                if (array[1] === array[4] && array[1] === array[7]) decideWinner(array[1]);
-                else if (array[6] === array[7] && array[6] === array[8]) decideWinner(array[6]);
+                if (array[1] === array[4] && array[1] === array[7]) _decideWinner(array[1]);
+                else if (array[6] === array[7] && array[6] === array[8]) _decideWinner(array[6]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 8:
-                if (array[2] === array[5] && array[2] === array[8]) decideWinner(array[2]);
-                else if (array[6] === array[7] && array[6] === array[8]) decideWinner(array[6]);
-                else if (array[0] === array[4] && array[0] === array[8]) decideWinner(array[0]);
+                if (array[2] === array[5] && array[2] === array[8]) _decideWinner(array[2]);
+                else if (array[6] === array[7] && array[6] === array[8]) _decideWinner(array[6]);
+                else if (array[0] === array[4] && array[0] === array[8]) _decideWinner(array[0]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
@@ -149,16 +156,21 @@ const game = (() => {
         }
     }
 
-    const decideWinner = (mark) => {
+    const getWinner = (cellIndex, count) => {
+        _checkWinner(cellIndex, count);
+    }
+
+    const _decideWinner = (mark) => {
         if (mark === 'X') displayController.displayResult(`${player1.getName()} WON`);
         if (mark === 'O') displayController.displayResult(`${player2.getName()} WON`);
+        gameBoardObj.setGameEnded();
     }
 
     const swapMark = () => {
         _toggleValidity();
     };
 
-    return { getValidMark, swapMark, checkWinner };
+    return { getValidMark, swapMark, getWinner };
 })();
 
 const displayController = (() => {
