@@ -1,5 +1,6 @@
 const gameBoarDiv = document.querySelector('.game-board');
 const resultDiv = document.querySelector('.result-banner');
+const replayButton = document.querySelector('#replay');
 
 const gameBoardObj = (() => {
     let _cellIndex;
@@ -24,8 +25,8 @@ const gameBoardObj = (() => {
         game.swapMark();
     }
 
-    const setGameEnded = () => {
-        _gameEnded = true;
+    const toggleGameEnd = () => {
+        _gameEnded = !_gameEnded;
     }
 
     const getArray = () => _boardArray;
@@ -34,7 +35,17 @@ const gameBoardObj = (() => {
         _checkRepetition(targetedCell);
     }
 
-    return { sanitizeValue, getArray, setGameEnded };
+    const setIteratorZero = () => {
+        _iterator = 0;
+    }
+
+    const resetBoardArray = () => {
+        for (let i = 0; i < 9; i++) {
+            _boardArray[i] = null;
+        }
+    }
+
+    return { sanitizeValue, getArray, toggleGameEnd, setIteratorZero, resetBoardArray };
 })();
 
 const Player = (_name, _mark, _valid) => {
@@ -49,11 +60,20 @@ const Player = (_name, _mark, _valid) => {
         _setValidity();
     }
 
+    const _resetValidPlayer = (value) => {
+        _valid = value;
+    }
+
+    const resetPlayer = (value) => {
+        _resetValidPlayer(value);
+    }
+
     return {
         getName,
         getMark,
         getValidStatus,
-        toggleValidity
+        toggleValidity,
+        resetPlayer
     }
 }
 
@@ -163,7 +183,7 @@ const game = (() => {
     const _decideWinner = (mark) => {
         if (mark === 'X') displayController.displayResult(`${player1.getName()} WON`);
         if (mark === 'O') displayController.displayResult(`${player2.getName()} WON`);
-        gameBoardObj.setGameEnded();
+        gameBoardObj.toggleGameEnd();
     }
 
     const swapMark = () => {
@@ -190,7 +210,26 @@ const displayController = (() => {
         _display(message);
     }
 
-    return { displayInput, displayResult };
+    const _resetGame = () => {
+        let allCells = Array.from(gameBoarDiv.children);
+
+        allCells.forEach(value => {
+            value.textContent = '';
+        })
+
+        resultDiv.textContent = '';
+
+        gameBoardObj.resetBoardArray();
+
+        gameBoardObj.setIteratorZero();
+
+        gameBoardObj.toggleGameEnd();
+
+        player1.resetPlayer(true);
+        player2.resetPlayer(false);
+    }
+
+    return { displayInput, displayResult, _resetGame };
 })();
 
 const player1 = Player('Player1', 'X', true);
@@ -200,4 +239,8 @@ gameBoarDiv.addEventListener('click', (event) => {
     let targetedCell = event.target.closest('div');
     gameBoardObj.sanitizeValue(targetedCell);
     console.log(targetedCell);
+})
+
+replayButton.addEventListener('click', () => {
+    displayController._resetGame();
 })

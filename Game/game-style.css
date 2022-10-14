@@ -146,6 +146,11 @@ body {
 
 .container button:hover {
     cursor: pointer;
+    scale: 1.2;
+}
+
+.container button:active {
+    transform: translateY(3px);
 }
 
 /* user style ends here */
