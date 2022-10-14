@@ -31,6 +31,7 @@ const gameBoardObj = (() => {
 })();
 
 const Player = (_name, _mark, _valid) => {
+    const getName = () => _name;
     const getMark = () => _mark;
     const getValidStatus = () => _valid;
     const _setValidity = () => {
@@ -42,6 +43,7 @@ const Player = (_name, _mark, _valid) => {
     }
 
     return {
+        getName,
         getMark,
         getValidStatus,
         toggleValidity
@@ -74,69 +76,69 @@ const game = (() => {
         let status;
         switch (cellIndex) {
             case 0:
-                if (array[0] === array[1] && array[0] === array[2]) displayController.displayResult('Victory');
-                else if (array[0] === array[3] && array[0] === array[6]) displayController.displayResult('Victory');
-                else if (array[0] === array[4] && array[0] === array[8]) displayController.displayResult('Victory');
+                if (array[0] === array[1] && array[0] === array[2]) decideWinner(array[0]);
+                else if (array[0] === array[3] && array[0] === array[6]) decideWinner(array[0]);
+                else if (array[0] === array[4] && array[0] === array[8]) decideWinner(array[0]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 1:
-                if (array[0] === array[1] && array[0] === array[2]) displayController.displayResult('Victory');
-                else if (array[1] === array[4] && array[1] === array[7]) displayController.displayResult('Victory');
+                if (array[0] === array[1] && array[0] === array[2]) decideWinner(array[0]);
+                else if (array[1] === array[4] && array[1] === array[7]) decideWinner(array[1]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 2:
-                if (array[0] === array[1] && array[0] === array[2]) displayController.displayResult('Victory');
-                else if (array[2] === array[5] && array[2] === array[8]) displayController.displayResult('Victory');
-                else if (array[2] === array[4] && array[2] === array[6]) displayController.displayResult('Victory');
+                if (array[0] === array[1] && array[0] === array[2]) decideWinner(array[0]);
+                else if (array[2] === array[5] && array[2] === array[8]) decideWinner(array[2]);
+                else if (array[2] === array[4] && array[2] === array[6]) decideWinner(array[2]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 3:
-                if (array[3] === array[4] && array[3] === array[5]) displayController.displayResult('Victory');
-                else if (array[0] === array[3] && array[0] === array[6]) displayController.displayResult('Victory');
+                if (array[3] === array[4] && array[3] === array[5]) decideWinner(array[3]);
+                else if (array[0] === array[3] && array[0] === array[6]) decideWinner(array[0]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 4:
-                if (array[1] === array[4] && array[1] === array[7]) displayController.displayResult('Victory');
-                else if (array[3] === array[4] && array[3] === array[5]) displayController.displayResult('Victory');
-                else if (array[0] === array[4] && array[0] === array[8]) displayController.displayResult('Victory');
+                if (array[1] === array[4] && array[1] === array[7]) decideWinner(array[1]);
+                else if (array[3] === array[4] && array[3] === array[5]) decideWinner(array[3]);
+                else if (array[0] === array[4] && array[0] === array[8]) decideWinner(array[0]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 5:
-                if (array[2] === array[5] && array[2] === array[8]) displayController.displayResult('Victory');
-                else if (array[3] === array[4] && array[3] === array[5]) displayController.displayResult('Victory');
+                if (array[2] === array[5] && array[2] === array[8]) decideWinner(array[2]);
+                else if (array[3] === array[4] && array[3] === array[5]) decideWinner(array[3]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 6:
-                if (array[0] === array[3] && array[0] === array[6]) displayController.displayResult('Victory');
-                else if (array[6] === array[7] && array[6] === array[8]) displayController.displayResult('Victory');
-                else if (array[6] === array[4] && array[6] === array[2]) displayController.displayResult('Victory');
+                if (array[0] === array[3] && array[0] === array[6]) decideWinner(array[0]);
+                else if (array[6] === array[7] && array[6] === array[8]) decideWinner(array[6]);
+                else if (array[6] === array[4] && array[6] === array[2]) decideWinner(array[6]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 7:
-                if (array[1] === array[4] && array[1] === array[7]) displayController.displayResult('Victory');
-                else if (array[6] === array[7] && array[6] === array[8]) displayController.displayResult('Victory');
+                if (array[1] === array[4] && array[1] === array[7]) decideWinner(array[1]);
+                else if (array[6] === array[7] && array[6] === array[8]) decideWinner(array[6]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
                 break;
             case 8:
-                if (array[2] === array[5] && array[2] === array[8]) displayController.displayResult('Victory');
-                else if (array[6] === array[7] && array[6] === array[8]) displayController.displayResult('Victory');
-                else if (array[0] === array[4] && array[0] === array[8]) displayController.displayResult('Victory');
+                if (array[2] === array[5] && array[2] === array[8]) decideWinner(array[2]);
+                else if (array[6] === array[7] && array[6] === array[8]) decideWinner(array[6]);
+                else if (array[0] === array[4] && array[0] === array[8]) decideWinner(array[0]);
                 else {
                     if (count === 9) displayController.displayResult('Match Drawn');
                 }
@@ -145,6 +147,11 @@ const game = (() => {
             default:
                 break;
         }
+    }
+
+    const decideWinner = (mark) => {
+        if (mark === 'X') displayController.displayResult(`${player1.getName()} WON`);
+        if (mark === 'O') displayController.displayResult(`${player2.getName()} WON`);
     }
 
     const swapMark = () => {
@@ -174,8 +181,8 @@ const displayController = (() => {
     return { displayInput, displayResult };
 })();
 
-const player1 = Player('player1', 'X', true);
-const player2 = Player('player2', 'O', false);
+const player1 = Player('Player1', 'X', true);
+const player2 = Player('Player2', 'O', false);
 
 gameBoarDiv.addEventListener('click', (event) => {
     let targetedCell = event.target.closest('div');
