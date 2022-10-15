@@ -217,6 +217,7 @@ const displayController = (() => {
 
         allCells.forEach(value => {
             value.textContent = '';
+            value.classList.remove('cross-symbol', 'round-symbol');
         })
 
         resultDiv.textContent = '';
