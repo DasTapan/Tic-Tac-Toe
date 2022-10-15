@@ -97,6 +97,19 @@ body {
 
     height: var(--cell-height);
     width: var(--cell-width);
+
+    padding: 30px;
+    font-size: 1.7rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.cross-symbol {
+    color: #E54510;
+}
+
+.round-symbol {
+    color: #04625F;
 }
 
 .game-board>div:hover {

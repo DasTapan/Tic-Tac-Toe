@@ -18,6 +18,8 @@ const gameBoardObj = (() => {
 
     const _insertMark = (clickedCell) => {
         let _validMark = game.getValidMark();
+        if( _validMark === 'X') clickedCell.classList.add('cross-symbol');
+        if(_validMark === 'O') clickedCell.classList.add('round-symbol');
         _boardArray[_cellIndex] = _validMark;
         _iterator++;
         displayController.displayInput(clickedCell, _validMark);
