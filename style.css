@@ -118,7 +118,10 @@ button#start {
     letter-spacing: 1.5px;
 }
 
-.item.name input,
+.item.name input {
+    cursor: text;
+}
+
 .item.icon input,
 button#start:hover {
     cursor: pointer;

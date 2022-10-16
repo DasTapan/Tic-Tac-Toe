@@ -235,8 +235,8 @@ const displayController = (() => {
     return { displayInput, displayResult, _resetGame };
 })();
 
-const player1 = Player('Player1', 'X', true);
-const player2 = Player('Player2', 'O', false);
+const player1 = Player(localStorage.getItem('player1'), 'X', true);
+const player2 = Player(localStorage.getItem('player2'), 'O', false);
 
 gameBoarDiv.addEventListener('click', (event) => {
     let targetedCell = event.target.closest('div');
