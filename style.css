@@ -113,6 +113,7 @@ button#start {
     background-color: #413A3B;
     font-family: 'LobsterRegular', system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, 'Open Sans', sans-serif;
 
+    margin-left: 55px;
     padding: 5px;
     font-size: 1.3rem;
     letter-spacing: 1.5px;

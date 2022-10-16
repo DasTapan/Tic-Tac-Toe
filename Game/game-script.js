@@ -18,8 +18,8 @@ const gameBoardObj = (() => {
 
     const _insertMark = (clickedCell) => {
         let _validMark = game.getValidMark();
-        if( _validMark === 'X') clickedCell.classList.add('cross-symbol');
-        if(_validMark === 'O') clickedCell.classList.add('round-symbol');
+        if (_validMark === 'X') clickedCell.classList.add('cross-symbol');
+        if (_validMark === 'O') clickedCell.classList.add('round-symbol');
         _boardArray[_cellIndex] = _validMark;
         _iterator++;
         displayController.displayInput(clickedCell, _validMark);
@@ -183,8 +183,8 @@ const game = (() => {
     }
 
     const _decideWinner = (mark) => {
-        if (mark === 'X') displayController.displayResult(`${player1.getName()} WON`);
-        if (mark === 'O') displayController.displayResult(`${player2.getName()} WON`);
+        if (mark === 'X') displayController.displayResult(`${player1.getName()} WON!!`);
+        if (mark === 'O') displayController.displayResult(`${player2.getName()} WON!!`);
         gameBoardObj.toggleGameEnd();
     }
 
