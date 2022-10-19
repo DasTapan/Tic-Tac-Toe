@@ -87,7 +87,7 @@ body {
 .game-board {
     display: flex;
     flex-wrap: wrap;
-
+    /* create variable for future use */
     --cell-height: calc(100% / 3);
     --cell-width: calc(100% / 3);
 }
@@ -116,6 +116,7 @@ body {
     cursor: pointer;
 }
 
+/* trim borders to look like tic-tac-toe */
 .cell.one,
 .cell.two,
 .cell.three {

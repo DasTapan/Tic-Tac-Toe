@@ -76,7 +76,6 @@ body {
 }
 
 .container>* {
-    /* border: 4px dotted greenyellow; */
     margin-bottom: 20px;
     color: whitesmoke;
 }

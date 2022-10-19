@@ -3,6 +3,7 @@ const startButton = document.querySelector('#start');
 const player1 = document.querySelector('#player-one-name');
 const player2 = document.querySelector('#player-two-name');
 
+// stops starting game without name
 const validateInput = (() => {
     const _validate = () => {
         if (player1.value != '' && player2.value != '') return true;
@@ -24,6 +25,7 @@ const validateInput = (() => {
 })();
 
 const infoPicker = (() => {
+    //pass value to game.script file
     const valueSender = () => {
         let _playerOneName = player1.value;
         let _playerTwoName = player2.value;
